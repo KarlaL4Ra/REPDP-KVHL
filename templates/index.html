@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bitácora de Entrada - Transportistas</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Bitácora de Entrada de Transportistas</h1>
+
+      <form id="bitacoraForm" method="POST" class="form-grid">
+        <div class="form-group">
+          <label>Empresa</label>
+          <input type="text" name="empresa" required />
+        </div>
+
+        <div class="form-group">
+          <label>Origen</label>
+          <input type="text" name="origen" required />
+        </div>
+
+        <div class="form-group">
+          <label>Nombre del Transportista</label>
+          <input type="text" name="transportista" required />
+        </div>
+
+        <div class="form-group">
+          <label>Contenedor / Caja</label>
+          <input type="text" name="contenedor" required />
+        </div>
+
+        <div class="form-group">
+          <label>Hora de Entrada</label>
+          <input type="time" name="hora_entrada" required />
+        </div>
+
+        <div class="form-group">
+          <label>Hora de Salida</label>
+          <input type="time" name="hora_salida" />
+        </div>
+
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date" name="fecha" value="{{ fecha_hoy }}" required />
+        </div>
+
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button type="submit" class="btn-registrar">Registrar</button>
+        </div>
+      </form>
+
+      <hr class="divider" />
+
+      <h2>Registros</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Empresa</th>
+            <th>Origen</th>
+            <th>Transportista</th>
+            <th>Contenedor</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Duración (min)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in registros %}
+          <tr>
+            <td>{{ r.fecha }}</td>
+            <td>{{ r.empresa }}</td>
+            <td>{{ r.origen }}</td>
+            <td>{{ r.transportista }}</td>
+            <td>{{ r.contenedor }}</td>
+            <td>{{ r.hora_entrada }}</td>
+            <td>{{ r.hora_salida }}</td>
+            <td>{{ r.minutos if r.minutos != None else "-" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
